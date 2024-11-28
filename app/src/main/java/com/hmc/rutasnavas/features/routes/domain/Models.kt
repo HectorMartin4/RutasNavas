@@ -1,4 +1,4 @@
-package com.hmc.rutasnavas.features.domain
+package com.hmc.rutasnavas.features.routes.domain
 
 data class Route(
     val features: List<Feature>

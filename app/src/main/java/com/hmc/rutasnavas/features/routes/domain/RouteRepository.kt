@@ -1,4 +1,4 @@
-package com.hmc.rutasnavas.features.domain
+package com.hmc.rutasnavas.features.routes.domain
 
 interface RouteRepository {
 

@@ -1,8 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    id("kotlin-kapt")
-    alias(libs.plugins.hilt)
     alias(libs.plugins.safe.args)
     alias(libs.plugins.ksp)
 }
@@ -61,14 +59,11 @@ dependencies {
     // Skeleton
     implementation(libs.skeletonlayout)
 
-    // Room
-    implementation(libs.androidx.room.runtime)
-    implementation(libs.androidx.room.ktx)
-
-    // Hilt
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.kapt)
-
+    // Koin
+    implementation(project.dependencies.platform(libs.koin.bom))
+    implementation(libs.koin.android)
+    implementation(libs.koin.annotations)
+    ksp(libs.koin.ksp)
 
     // Fragment
     implementation(libs.androidx.fragment.ktx)
@@ -85,9 +80,5 @@ dependencies {
     implementation(libs.play.services.maps)
     implementation(libs.play.services.location)
 
-}
-
-kapt {
-    correctErrorTypes = true
 }
 
