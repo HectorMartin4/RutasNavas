@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.google.android.gms.maps.GoogleMap
@@ -19,6 +18,7 @@ import com.hmc.rutasnavas.features.routes.domain.RouteResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RouteDetailFragment : Fragment(), OnMapReadyCallback {
 
@@ -28,7 +28,7 @@ class RouteDetailFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var map: GoogleMap
 
-    val viewModel by viewModels<RouteDetailViewModel>()
+    private val viewModel: RouteDetailViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,10 +41,12 @@ class RouteDetailFragment : Fragment(), OnMapReadyCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.loadRoute(argument.id)
+        setupObservers()
 
         val mapFragment = SupportMapFragment.newInstance()
         childFragmentManager.beginTransaction()
-            .replace(R.id.map, mapFragment)
+            .replace(R.id.route_map, mapFragment)
             .commit()
         mapFragment.getMapAsync(this)
     }
@@ -55,6 +57,7 @@ class RouteDetailFragment : Fragment(), OnMapReadyCallback {
 
     private fun setupObservers() {
         val observer = Observer<RouteDetailViewModel.RouteUiState> {
+
             createRoute(it.route!!.start, it.route.end)
         }
         viewModel.routeUiState.observe(viewLifecycleOwner, observer)
@@ -69,7 +72,10 @@ class RouteDetailFragment : Fragment(), OnMapReadyCallback {
     private fun drawRoute(route: RouteResponse?) {
         val polyLineOptions = PolylineOptions()
         route?.features?.first()?.geometry?.coordinates?.forEach {
-            polyLineOptions.add(LatLng(it[0], it[1]))
+            polyLineOptions.add(LatLng(it[1], it[0]))
+        }
+        CoroutineScope(Dispatchers.Main).launch {
+            val poly = map.addPolyline(polyLineOptions)
         }
     }
 

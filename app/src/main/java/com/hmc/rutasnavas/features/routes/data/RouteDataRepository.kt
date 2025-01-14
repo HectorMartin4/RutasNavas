@@ -5,7 +5,9 @@ import com.hmc.rutasnavas.features.routes.data.remote.RouteRemoteDataSource
 import com.hmc.rutasnavas.features.routes.domain.Route
 import com.hmc.rutasnavas.features.routes.domain.RouteRepository
 import com.hmc.rutasnavas.features.routes.domain.RouteResponse
+import org.koin.core.annotation.Single
 
+@Single
 class RouteDataRepository(
     private val localDataSource: LocalRouteMock,
     private val remoteDataSource: RouteRemoteDataSource

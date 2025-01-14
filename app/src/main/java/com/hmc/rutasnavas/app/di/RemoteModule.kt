@@ -7,7 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
-@ComponentScan
+@ComponentScan("com.hmc.rutasnavas")
 class RemoteModule {
 
     private val url = "https://api.openrouteservice.org/"
