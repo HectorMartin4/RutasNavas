@@ -11,4 +11,30 @@
         android:label="@string/map_name"
         tools:layout="@layout/fragment_map" />
 
+    <fragment
+        android:id="@+id/fragment_route"
+        android:name="com.hmc.rutasnavas.features.routes.presentation.RouteFragment"
+        android:label="@string/routes_name"
+        tools:layout="@layout/fragment_map">
+
+        <action
+            android:id="@+id/action_to_route_detail"
+            app:destination="@+id/fragment_route_detail" />
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/fragment_route_detail"
+        android:name="com.hmc.rutasnavas.features.routes.presentation.RouteDetailFragment"
+        android:label="@string/routes_map_name"
+        tools:layout="@layout/fragment_route_detail">
+
+        <argument
+            android:name="id"
+            app:argType="string" />
+
+    </fragment>
+
+
 </navigation>

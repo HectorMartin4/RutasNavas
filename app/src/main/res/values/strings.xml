@@ -2,5 +2,7 @@
     <string name="app_name">RutasNavas</string>
 
     <string name="routes_name">Rutas</string>
+    <string name="routes_map_name">Mapa de rutas</string>
     <string name="map_name">Mapa</string>
+
 </resources>
