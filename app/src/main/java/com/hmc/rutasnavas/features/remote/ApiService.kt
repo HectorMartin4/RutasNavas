@@ -1,4 +1,4 @@
-package com.hmc.rutasnavas.features.routes.data.remote
+package com.hmc.rutasnavas.features.remote
 
 import com.hmc.rutasnavas.features.routes.domain.RouteResponse
 import retrofit2.Response

@@ -1,6 +1,6 @@
 package com.hmc.rutasnavas.features.routes.di
 
-import com.hmc.rutasnavas.features.routes.data.remote.ApiService
+import com.hmc.rutasnavas.features.remote.ApiService
 import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single

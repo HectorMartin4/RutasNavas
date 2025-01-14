@@ -75,7 +75,7 @@ class RouteDetailFragment : Fragment(), OnMapReadyCallback {
             polyLineOptions.add(LatLng(it[1], it[0]))
         }
         CoroutineScope(Dispatchers.Main).launch {
-            val poly = map.addPolyline(polyLineOptions)
+            map.addPolyline(polyLineOptions)
         }
     }
 
