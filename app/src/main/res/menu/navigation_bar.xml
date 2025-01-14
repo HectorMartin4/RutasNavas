@@ -7,7 +7,7 @@
         android:title="@string/map_name" />
 
     <item
-        android:id="@+id/fragment_routes"
+        android:id="@+id/fragment_route"
         android:icon="@drawable/ic_route"
         android:title="@string/routes_name" />
 

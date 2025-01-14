@@ -1,5 +1,6 @@
 package com.hmc.rutasnavas.features.routes.data.remote
 
+import com.hmc.rutasnavas.features.routes.domain.RouteResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -11,5 +12,5 @@ interface ApiService {
         @Query("api_key") key: String,
         @Query("start", encoded = true) start: String,
         @Query("end", encoded = true) end: String
-    ): Response<RouteApiModel>
+    ): Response<RouteResponse>
 }

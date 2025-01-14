@@ -4,14 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hmc.rutasnavas.features.routes.domain.GetRouteFeedUseCase
+import com.hmc.rutasnavas.features.routes.domain.GetRoutesFeedUseCase
 import com.hmc.rutasnavas.features.routes.domain.Route
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.android.annotation.KoinViewModel
 
 @KoinViewModel
-class RouteViewModel(private val getRouteFeedUseCase: GetRouteFeedUseCase) : ViewModel() {
+class RouteViewModel(private val getRoutesFeedUseCase: GetRoutesFeedUseCase) : ViewModel() {
 
     private val _uiState = MutableLiveData<UiState>()
     val uiState: LiveData<UiState> = _uiState
@@ -19,7 +19,7 @@ class RouteViewModel(private val getRouteFeedUseCase: GetRouteFeedUseCase) : Vie
     fun loadRoutes() {
         _uiState.value = UiState(isLoading = true)
         viewModelScope.launch(Dispatchers.IO) {
-            val feed = getRouteFeedUseCase.invoke()
+            val feed = getRoutesFeedUseCase.invoke()
             _uiState.postValue(UiState(routes = feed))
         }
     }

@@ -9,9 +9,12 @@ class RouteViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
     val binding = ViewRouteItemBinding.bind(view)
 
-    fun render(route: Route) {
+    fun render(route: Route, onClickDetail: ((String) -> Unit)?) {
         binding.apply {
             routeTitle.text = route.title
+            view.setOnClickListener {
+                onClickDetail!!.invoke(route.id)
+            }
         }
     }
 

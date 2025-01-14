@@ -8,6 +8,13 @@ import com.hmc.rutasnavas.R
 import com.hmc.rutasnavas.features.routes.domain.Route
 
 class RouteAdapter : ListAdapter<Route, RouteViewHolder>(RouteDiffUtil()) {
+
+    private var onClickDetail: ((String) -> Unit)? = null
+
+    fun setOnclickDetail(onClickDetail: ((String) -> Unit)) {
+        this.onClickDetail = onClickDetail
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RouteViewHolder {
         val view: View = LayoutInflater.from(parent.context)
             .inflate(R.layout.view_route_item, parent, false)
@@ -15,7 +22,7 @@ class RouteAdapter : ListAdapter<Route, RouteViewHolder>(RouteDiffUtil()) {
     }
 
     override fun onBindViewHolder(holder: RouteViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        holder.render(currentList[position], onClickDetail)
     }
 
     override fun getItemCount(): Int = currentList.size

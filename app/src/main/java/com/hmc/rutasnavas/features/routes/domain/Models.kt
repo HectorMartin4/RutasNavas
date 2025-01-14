@@ -1,15 +1,23 @@
 package com.hmc.rutasnavas.features.routes.domain
 
+import com.google.gson.annotations.SerializedName
+
 data class Route(
-    val id: Int,
+    val id: String,
     val title: String,
-    val features: List<Feature>
+    val start: String,
+    val end: String
 )
 
-data class Feature(
-    val geometry: List<Geometry>
+
+data class RouteResponse(
+    @SerializedName("features") val features: List<FeatureResponse>
 )
 
-data class Geometry(
-    val coordinates: List<List<Double>>
+data class FeatureResponse(
+    @SerializedName("geometry") val geometry: GeometryResponse
+)
+
+data class GeometryResponse(
+    @SerializedName("coordinates") val coordinates: List<List<Double>>
 )

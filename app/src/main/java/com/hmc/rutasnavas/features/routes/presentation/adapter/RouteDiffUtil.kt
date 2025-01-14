@@ -5,7 +5,7 @@ import com.hmc.rutasnavas.features.routes.domain.Route
 
 class RouteDiffUtil : DiffUtil.ItemCallback<Route>() {
     override fun areItemsTheSame(oldItem: Route, newItem: Route): Boolean {
-        return oldItem.features == newItem.features
+        return oldItem.id == newItem.id
     }
 
     override fun areContentsTheSame(oldItem: Route, newItem: Route): Boolean {
