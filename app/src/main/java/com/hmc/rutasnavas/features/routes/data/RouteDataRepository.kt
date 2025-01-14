@@ -1,7 +1,7 @@
 package com.hmc.rutasnavas.features.routes.data
 
+import com.hmc.rutasnavas.features.remote.RouteRemoteDataSource
 import com.hmc.rutasnavas.features.routes.data.local.LocalRouteMock
-import com.hmc.rutasnavas.features.routes.data.remote.RouteRemoteDataSource
 import com.hmc.rutasnavas.features.routes.domain.Route
 import com.hmc.rutasnavas.features.routes.domain.RouteRepository
 import com.hmc.rutasnavas.features.routes.domain.RouteResponse
