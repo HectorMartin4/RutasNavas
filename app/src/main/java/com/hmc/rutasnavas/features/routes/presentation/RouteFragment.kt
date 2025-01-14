@@ -40,6 +40,7 @@ class RouteFragment : Fragment() {
 
     private fun setupView() {
         binding.apply {
+            mainToolbar.toolbar.title = getString(R.string.app_name)
             listRoute.apply {
                 layoutManager = LinearLayoutManager(
                     requireContext(),

@@ -1,9 +1,14 @@
 package com.hmc.rutasnavas.features.routes.presentation
 
+import android.Manifest
+import android.annotation.SuppressLint
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
@@ -53,6 +58,8 @@ class RouteDetailFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(map: GoogleMap) {
         this.map = map
+        enableLocation()
+        viewModel.routeMarker(map)
     }
 
     private fun setupObservers() {
@@ -78,6 +85,24 @@ class RouteDetailFragment : Fragment(), OnMapReadyCallback {
             map.addPolyline(polyLineOptions)
         }
     }
+
+    private fun isLocationPermissionGranted() = ContextCompat.checkSelfPermission(
+        requireContext(),
+        Manifest.permission.ACCESS_FINE_LOCATION
+    ) == PackageManager.PERMISSION_GRANTED
+
+    @SuppressLint("MissingPermission")
+    private fun enableLocation() {
+        if (!::map.isInitialized) return
+        if (isLocationPermissionGranted()) {
+            map.isMyLocationEnabled = true
+        } else {
+            Toast.makeText(requireContext(), "Acepta los permisos en ajustes", Toast.LENGTH_SHORT)
+                .show()
+        }
+    }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()
