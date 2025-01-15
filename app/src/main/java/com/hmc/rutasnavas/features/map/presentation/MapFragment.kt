@@ -176,16 +176,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         const val REQUEST_CODE_LOCATION = 0
     }
 
-    @SuppressLint("MissingPermission")
-    override fun onResume() {
-        super.onResume()
-        if (!isLocationPermissionGranted()) {
-            mapFragment.isMyLocationEnabled = false
-            Toast.makeText(requireContext(), "Acepta los permisos en ajustes", Toast.LENGTH_SHORT)
-                .show()
-        }
-    }
-
     private fun showInputDialog(context: Context, start: String, end: String) {
 
         val inputField = TextInputEditText(context).apply {
