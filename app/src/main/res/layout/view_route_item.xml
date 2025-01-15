@@ -24,6 +24,17 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="hola" />
 
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/icon_delete"
+            android:layout_width="@dimen/delete_icon_size"
+            android:layout_height="@dimen/delete_icon_size"
+            android:layout_marginEnd="@dimen/spacing_horizontal"
+            android:src="@drawable/ic_delete"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

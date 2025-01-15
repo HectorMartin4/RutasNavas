@@ -4,6 +4,7 @@
     <string name="routes_name">Rutas</string>
     <string name="routes_map_name">Mapa de rutas</string>
     <string name="map_name">Mapa</string>
-    <string name="btn_calculate">Calcular Ruta</string>
+    <string name="btn_calculate_text">Calcular Ruta</string>
+    <string name="btn_add_route_text">Guardar la ruta</string>
 
 </resources>

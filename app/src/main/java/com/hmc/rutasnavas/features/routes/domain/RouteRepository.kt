@@ -7,4 +7,8 @@ interface RouteRepository {
     fun getRoute(id: String): Route
 
     suspend fun createRoute(start: String, end: String): RouteResponse
+
+    fun saveRoute(route: Route)
+
+    fun deleteRoute(id: String)
 }

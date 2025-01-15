@@ -2,6 +2,7 @@ package com.hmc.rutasnavas.features.map.presentation
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -18,8 +20,10 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Polyline
 import com.google.android.gms.maps.model.PolylineOptions
+import com.google.android.material.textfield.TextInputEditText
 import com.hmc.rutasnavas.R
 import com.hmc.rutasnavas.databinding.FragmentMapBinding
+import com.hmc.rutasnavas.features.routes.domain.Route
 import com.hmc.rutasnavas.features.routes.domain.RouteResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -33,6 +37,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var mapFragment: GoogleMap
     private lateinit var btnCalculateRoute: Button
+    private lateinit var btnAddRoute: Button
 
     private lateinit var start: String
     private lateinit var end: String
@@ -53,6 +58,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
     private fun setupView() {
         btnCalculateRoute = binding.btnRoute
+        btnAddRoute = binding.btnAdd
         btnCalculateRoute.setOnClickListener {
             start = ""
             end = ""
@@ -70,8 +76,14 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                     } else if (end.isEmpty()) {
                         end = "${it.longitude},${it.latitude}"
                         createRoute(start, end)
+
+                        btnAddRoute.setOnClickListener {
+                            showInputDialog(requireContext(), start, end)
+                        }
                     }
                 }
+
+
             }
         }
     }
@@ -172,6 +184,40 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             Toast.makeText(requireContext(), "Acepta los permisos en ajustes", Toast.LENGTH_SHORT)
                 .show()
         }
+    }
+
+    private fun showInputDialog(context: Context, start: String, end: String) {
+
+        val inputField = TextInputEditText(context).apply {
+            hint = "Titulo de la ruta"
+        }
+
+        val dialog = AlertDialog.Builder(context)
+            .setTitle("Añadir Título")
+            .setMessage("Introduce un título para la ruta:")
+            .setView(inputField)
+            .setPositiveButton("Guardar") { _, _ ->
+                val title = inputField.text.toString().trim()
+
+                if (title.isNotEmpty()) {
+                    val save = Route(
+                        title = title,
+                        start = start,
+                        end = end
+                    )
+                    viewModel.saveRoute(save)
+                    Toast.makeText(context, "Título guardado: $title", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(context, "El título no puede estar vacío", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+            .setNegativeButton("Cancelar") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+
+        dialog.show()
     }
 
     override fun onDestroyView() {

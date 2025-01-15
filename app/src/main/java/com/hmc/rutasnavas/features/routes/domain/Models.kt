@@ -1,9 +1,10 @@
 package com.hmc.rutasnavas.features.routes.domain
 
 import com.google.gson.annotations.SerializedName
+import java.util.UUID
 
 data class Route(
-    val id: String,
+    val id: String = UUID.randomUUID().toString(),
     val title: String,
     val start: String,
     val end: String

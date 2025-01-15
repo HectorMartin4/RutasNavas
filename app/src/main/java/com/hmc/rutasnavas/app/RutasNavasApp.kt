@@ -1,6 +1,7 @@
 package com.hmc.rutasnavas.app
 
 import android.app.Application
+import com.hmc.rutasnavas.app.di.AppModule
 import com.hmc.rutasnavas.app.di.RemoteModule
 import com.hmc.rutasnavas.features.routes.di.RouteModule
 import org.koin.android.ext.koin.androidContext
@@ -14,6 +15,7 @@ class RutasNavasApp : Application() {
         startKoin {
             androidContext(this@RutasNavasApp)
             modules(
+                AppModule().module,
                 RemoteModule().module,
                 RouteModule().module
             )

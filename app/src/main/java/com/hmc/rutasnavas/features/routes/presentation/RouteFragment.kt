@@ -68,6 +68,10 @@ class RouteFragment : Fragment() {
                 routeAdapter.setOnclickDetail { id ->
                     navigateToDetail(id)
                 }
+                routeAdapter.setOnClickDelete { id ->
+                    removeRoute(id)
+                }
+
             }
         }
         viewModel.uiState.observe(viewLifecycleOwner, observer)
@@ -77,6 +81,10 @@ class RouteFragment : Fragment() {
         findNavController().navigate(
             RouteFragmentDirections.actionToRouteDetail(id)
         )
+    }
+
+    private fun removeRoute(id: String) {
+        viewModel.deleteRoute(id)
     }
 
     override fun onDestroyView() {

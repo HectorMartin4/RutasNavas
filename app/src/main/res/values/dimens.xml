@@ -5,8 +5,10 @@
     <dimen name="spacing_vertical">16dp</dimen>
 
     <dimen name="card_height">100dp</dimen>
-    <dimen name="text_size">24dp</dimen>
+    <dimen name="text_size">24sp</dimen>
 
     <dimen name="card_elevation">5dp</dimen>
+
+    <dimen name="delete_icon_size">30dp</dimen>
 
 </resources>

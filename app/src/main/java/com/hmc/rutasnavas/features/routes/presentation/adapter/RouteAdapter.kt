@@ -10,9 +10,15 @@ import com.hmc.rutasnavas.features.routes.domain.Route
 class RouteAdapter : ListAdapter<Route, RouteViewHolder>(RouteDiffUtil()) {
 
     private var onClickDetail: ((String) -> Unit)? = null
+    private var onClickDelete: ((String) -> Unit)? = null
 
     fun setOnclickDetail(onClickDetail: ((String) -> Unit)) {
         this.onClickDetail = onClickDetail
+    }
+
+    fun setOnClickDelete(onClickDelete: ((String) -> Unit)) {
+        this.onClickDelete = onClickDelete
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RouteViewHolder {
@@ -22,7 +28,7 @@ class RouteAdapter : ListAdapter<Route, RouteViewHolder>(RouteDiffUtil()) {
     }
 
     override fun onBindViewHolder(holder: RouteViewHolder, position: Int) {
-        holder.render(currentList[position], onClickDetail)
+        holder.render(currentList[position], onClickDetail, onClickDelete)
     }
 
     override fun getItemCount(): Int = currentList.size
