@@ -76,6 +76,9 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
 
+    // Gson
+    implementation(libs.gson.serializer)
+
     // Maps
     implementation(libs.play.services.maps)
     implementation(libs.play.services.location)
