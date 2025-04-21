@@ -32,8 +32,8 @@ class RouteDetailViewModel(
         }
     }
 
-    suspend fun createRoute(start: String, end: String): RouteResponse {
-        return createRouteUseCase.invoke(start, end)
+    suspend fun createRoute(apiKey: String, start: String, end: String): RouteResponse {
+        return createRouteUseCase.invoke(apiKey, start, end)
     }
 
     fun routeMarker(map: GoogleMap) {

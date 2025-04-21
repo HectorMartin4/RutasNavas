@@ -5,5 +5,5 @@ import org.koin.core.annotation.Single
 @Single
 class GetRoutesFeedUseCase(private val routeRepository: RouteRepository) {
 
-    operator fun invoke(): List<Route> = routeRepository.getRoutes()
+    suspend operator fun invoke(): List<Route> = routeRepository.getRoutes()
 }

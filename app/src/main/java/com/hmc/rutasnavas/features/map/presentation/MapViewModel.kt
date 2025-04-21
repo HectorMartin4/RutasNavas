@@ -16,8 +16,8 @@ class MapViewModel(
     private val saveRouteUseCase: SaveRouteUseCase
 ) : ViewModel() {
 
-    suspend fun createRoute(start: String, end: String): RouteResponse {
-        return createRouteUseCase.invoke(start, end)
+    suspend fun createRoute(apiKey: String, start: String, end: String): RouteResponse {
+        return createRouteUseCase.invoke(apiKey, start, end)
     }
 
     fun saveRoute(route: Route) {

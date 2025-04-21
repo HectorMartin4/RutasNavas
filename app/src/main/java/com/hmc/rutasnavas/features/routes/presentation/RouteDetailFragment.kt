@@ -63,16 +63,17 @@ class RouteDetailFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun setupObservers() {
+        val apiKey: String = this.getString(R.string.open_route_service_key)
         val observer = Observer<RouteDetailViewModel.RouteUiState> {
 
-            createRoute(it.route!!.start, it.route.end)
+            createRoute(apiKey, it.route!!.start, it.route.end)
         }
         viewModel.routeUiState.observe(viewLifecycleOwner, observer)
     }
 
-    private fun createRoute(start: String, end: String) {
+    private fun createRoute(apiKey: String, start: String, end: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            drawRoute(viewModel.createRoute(start, end))
+            drawRoute(viewModel.createRoute(apiKey, start, end))
         }
     }
 
