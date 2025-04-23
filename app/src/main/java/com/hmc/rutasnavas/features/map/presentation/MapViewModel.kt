@@ -24,6 +24,7 @@ class MapViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             saveRouteUseCase.invoke(route)
         }
-
     }
+
+
 }
