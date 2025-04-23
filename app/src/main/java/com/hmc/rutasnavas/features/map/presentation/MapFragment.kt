@@ -57,6 +57,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun setupView() {
+        val apiKey: String = this.getString(R.string.open_route_service_key)
         btnCalculateRoute = binding.btnRoute
         btnAddRoute = binding.btnAdd
         btnCalculateRoute.setOnClickListener {
@@ -75,7 +76,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                         start = "${it.longitude},${it.latitude}"
                     } else if (end.isEmpty()) {
                         end = "${it.longitude},${it.latitude}"
-                        createRoute(start, end)
+                        createRoute(apiKey, start, end)
 
                         btnAddRoute.setOnClickListener {
                             showInputDialog(requireContext(), start, end)
@@ -104,9 +105,9 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         enableLocation()
     }
 
-    private fun createRoute(start: String, end: String) {
+    private fun createRoute(apiKey: String, start: String, end: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            drawRoute(viewModel.createRoute(start, end))
+            drawRoute(viewModel.createRoute(apiKey, start, end))
         }
     }
 

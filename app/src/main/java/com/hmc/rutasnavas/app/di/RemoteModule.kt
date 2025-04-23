@@ -1,5 +1,8 @@
 package com.hmc.rutasnavas.app.di
 
+import com.google.firebase.Firebase
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.database
 import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
@@ -17,4 +20,7 @@ class RemoteModule {
         .addConverterFactory(GsonConverterFactory.create())
         .baseUrl(url)
         .build()
+
+    @Single
+    fun providesFirebaseDatabase(): FirebaseDatabase = Firebase.database
 }

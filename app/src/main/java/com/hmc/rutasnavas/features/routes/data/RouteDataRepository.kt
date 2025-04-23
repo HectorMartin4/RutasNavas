@@ -1,8 +1,8 @@
 package com.hmc.rutasnavas.features.routes.data
 
 import com.hmc.rutasnavas.features.remote.RouteRemoteDataSource
-import com.hmc.rutasnavas.features.routes.data.local.LocalRouteMock
 import com.hmc.rutasnavas.features.routes.data.local.RouteXmlLocalDataSource
+import com.hmc.rutasnavas.features.routes.data.remote.RouteFirebaseDataSource
 import com.hmc.rutasnavas.features.routes.domain.Route
 import com.hmc.rutasnavas.features.routes.domain.RouteRepository
 import com.hmc.rutasnavas.features.routes.domain.RouteResponse
@@ -10,16 +10,16 @@ import org.koin.core.annotation.Single
 
 @Single
 class RouteDataRepository(
-    private val dataMock: LocalRouteMock,
+    private val firebaseDataSource: RouteFirebaseDataSource,
     private val localDataSource: RouteXmlLocalDataSource,
     private val remoteDataSource: RouteRemoteDataSource
 ) : RouteRepository {
 
-    override fun getRoutes(): List<Route> {
+    override suspend fun getRoutes(): List<Route> {
         val localRoutes = localDataSource.getAllRoutes()
 
         return localRoutes.ifEmpty {
-            val mock = dataMock.getRouteList()
+            val mock = firebaseDataSource.getRoutes()
             localDataSource.saveAllRoutes(mock)
             mock
         }
@@ -29,8 +29,8 @@ class RouteDataRepository(
         return localDataSource.findRouteById(id)
     }
 
-    override suspend fun createRoute(start: String, end: String): RouteResponse {
-        return remoteDataSource.createRoute(start, end)
+    override suspend fun createRoute(apiKey: String, start: String, end: String): RouteResponse {
+        return remoteDataSource.createRoute(apiKey, start, end)
     }
 
     override fun saveRoute(route: Route) {

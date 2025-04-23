@@ -5,6 +5,6 @@ import org.koin.core.annotation.Single
 @Single
 class CreateRouteUseCase(private val routeRepository: RouteRepository) {
 
-    suspend operator fun invoke(start: String, end: String): RouteResponse =
-        routeRepository.createRoute(start, end)
+    suspend operator fun invoke(apiKey: String, start: String, end: String): RouteResponse =
+        routeRepository.createRoute(apiKey, start, end)
 }
